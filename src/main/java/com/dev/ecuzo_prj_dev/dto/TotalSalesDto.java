@@ -1,0 +1,44 @@
+package com.dev.ecuzo_prj_dev.dto;
+
+import com.dev.ecuzo_prj_dev.entity.Orders;
+import com.dev.ecuzo_prj_dev.entity.TotalSales;
+import com.dev.ecuzo_prj_dev.entity.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import java.time.LocalDateTime;
+
+@NoArgsConstructor
+@Setter
+@Getter
+@AllArgsConstructor
+@Data
+@Builder
+public class TotalSalesDto {
+    private int id;
+    private String content;
+    private Integer totalPrice;
+    private  String token;
+    private String userId;
+    private String tableNum;
+    private String userNick;
+    private LocalDateTime createAt;
+    private LocalDateTime updateAt;
+    @JsonIgnore
+    private Users users;
+
+    public TotalSales toEntity(){
+        TotalSales totalSales = TotalSales.builder()
+                .id(this.id)
+                .token(this.token)
+                .content(this.content)
+                .totalPrice(this.totalPrice)
+                .createAt(this.createAt)
+                .updateAt(this.updateAt)
+                .users(this.users)
+                .build();
+        return totalSales;
+    }
+    public void addUser(Users users){
+        this.users=users;
+    }
+}
